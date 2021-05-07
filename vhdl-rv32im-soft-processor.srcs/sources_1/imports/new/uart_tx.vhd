@@ -88,14 +88,18 @@ begin
 		signal r_tx_send_stab : std_logic := '0';
 		begin
 			process(i_clk) begin
-				r_tx_send <= r_tx_send_stab; r_tx_send_stab <= i_tx_send;
+				if rising_edge(i_clk) then
+					r_tx_send <= r_tx_send_stab; r_tx_send_stab <= i_tx_send;
+				end if;
 			end process;
 	end generate gen_flop_send;
 	
 	gen_no_flop_send : if not g_FLOP_SEND_INPUT generate
 		begin
 			process(i_clk) begin
-				r_tx_send <= i_tx_send;
+				if rising_edge(i_clk) then
+					r_tx_send <= i_tx_send;
+				end if;
 			end process;
 	end generate gen_no_flop_send;
 	
@@ -103,14 +107,18 @@ begin
 		signal r_tx_valid_stab : std_logic := '0';
 		begin
 			process(i_clk) begin
-				r_tx_valid <= r_tx_valid_stab; r_tx_valid_stab <= i_tx_valid;
+				if rising_edge(i_clk) then
+					r_tx_valid <= r_tx_valid_stab; r_tx_valid_stab <= i_tx_valid;
+				end if;
 			end process;
 	end generate gen_flop_valid;
 	
 	gen_no_flop_valid : if not g_FLOP_VALID_INPUT generate
 		begin
 			process(i_clk) begin
-				r_tx_valid <= i_tx_valid;
+				if rising_edge(i_clk) then
+					r_tx_valid <= i_tx_valid;
+				end if;
 			end process;
 	end generate gen_no_flop_valid;
 
